@@ -20,6 +20,7 @@ export class MoviesService {
 
     constructor() {
         this.getMovies();
+        this.getTrendingMovies();
     }
 
 
@@ -43,6 +44,26 @@ export class MoviesService {
             .subscribe();
     }
 
+  public getTrendingMovies(): void {
+    this._http
+      .get<MovieResponse>(`${this._apiUrl}/trending/movie/day?api_key=${this._apiKey}`)
+      .pipe(
+        tap((movies:MovieResponse) => this.trendingMovies.set(movies.results)),
+        tap(() => this.setRandomMovie())
+      )
+      .subscribe();
+  }
+
+    public setRandomMovie() : void {
+      const totalTrending = this.trendingMovies().length;
+      const randomIndex = this._getRandomInt(0, totalTrending);
+      const randomMovie = this.trendingMovies()[randomIndex];
+      this.selectedMovie.set(randomMovie);
+    }
+
+    private _getRandomInt(min=0, max=50) : number {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
 
 }
