@@ -1,0 +1,12 @@
+<div class="cursor-pointer " role="button">
+    <img class="aspect-[2/3]" [src]="getPosterURL" (error)="setImageError(true)" [alt]="movie().title">
+    <div class="movie-card-overlay">
+        <div class="movie-card-content">
+            <h3 class="mb-2 text-lg font-bold">{{movie().title}}</h3>
+            <p class="text-small text-gray-300 line-clamp-2">
+                {{movie().overview}}
+            </p>
+        </div>
+    </div>
+
+</div>

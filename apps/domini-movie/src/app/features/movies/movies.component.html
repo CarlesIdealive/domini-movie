@@ -1,0 +1,9 @@
+<div class="grid grid-col-2-gap-4 px-4 mx-auto mt-6 max-w-7xl md:grid-cols-4 lg:grid-cols-6">
+
+    @for (movie of movies(); track movie.id) {
+        <a [routerLink]="['/movies', movie.id]">
+            <movie-card [movie]="movie" class="w-full" />
+        </a>
+    }
+
+</div>
