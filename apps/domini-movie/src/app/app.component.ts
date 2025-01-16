@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeroComponent } from './layout/hero/hero.component';
+import { MoviesService } from './features/movies/movies.service';
 
 @Component({
   imports: [
     RouterOutlet,
+    HeroComponent,
 
   ],
   selector: 'app-root',
@@ -12,6 +15,9 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'domini-movie';
+  private readonly _moviesService = inject(MoviesService);
+  // public heroMovie = this._moviesService.selectedMovie;
+  public heroMovie = computed(() => this._moviesService.selectedMovie());
   public showButton: boolean = false;
 
   constructor() {
