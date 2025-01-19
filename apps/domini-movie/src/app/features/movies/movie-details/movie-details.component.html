@@ -1,2 +1,36 @@
-<p>movie-details works!</p>
-<p>{{ movieId() }}</p>
+<div class="min-h-screen p-4 md:p-8">
+    <div class="max-w-4xl mx-auto mt-12">
+        <!-- TODO Movie debe tener valor -->
+        <button 
+            class="gap-2 flex items-center mb-8 transition-colors text-netflix-red hover:text-netflix-red/80"
+            (click)="$event.preventDefault(); goBack()">
+            Go Back
+        </button>
+
+        @if (movie.hasValue()) {
+            @let movieData = movie.value();
+            <div class="grid gap-8 mt-12 md:grid-cols-2">
+                <img [src]="'https://image.tmdb.org/t/p/w500' + movieData?.poster_path" [alt]="movieData?.title" class="w-full rounded-lg">
+
+                <div class="">
+                    <h1 class="mb-4 text-4xl font-bold">
+                        {{ movieData?.title }}
+                    </h1>
+                    <p class="mb-4 text-gray-900">{{ movieData?.overview}}</p>
+                    <div class="space-y-2">
+                    <p class="">
+                        <span class="font-bold">Release Date: </span>
+                        {{ movieData?.release_date | date: 'mediumDate' }}
+                    </p>
+                    <p class="">
+                        <span class="font-bold">Rating: </span>
+                        {{ movieData?.vote_average | number: '1.1-1' }}
+                    </p>
+
+                </div>
+            </div>
+          </div>
+        }
+    </div>
+
+</div>

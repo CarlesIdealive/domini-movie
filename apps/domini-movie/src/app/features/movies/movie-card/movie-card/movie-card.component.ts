@@ -16,7 +16,7 @@ export class MovieCardComponent {
   public movie : InputSignal<Movie> = input.required<Movie>();
   public imageError : boolean = false;
 
-  public get getPosterURL() : string {
+  public getPosterURL() : string {
     const baseUrl: string = 'https://image.tmdb.org/t/p/w500';
     return this.imageError ?
       'assets/poster-placeholder.png' :
