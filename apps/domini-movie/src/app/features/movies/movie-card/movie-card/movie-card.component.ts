@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, InputSignal, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, InputSignal, inject, input } from '@angular/core';
 import { Movie } from '../../models/movie.interface';
+import { ImageService } from 'apps/domini-movie/src/app/shared/image.service';
 
 @Component({
   selector: 'movie-card',
@@ -15,12 +16,10 @@ import { Movie } from '../../models/movie.interface';
 export class MovieCardComponent { 
   public movie : InputSignal<Movie> = input.required<Movie>();
   public imageError : boolean = false;
+  private readonly _imageService = inject(ImageService);
 
   public getPosterURL() : string {
-    const baseUrl: string = 'https://image.tmdb.org/t/p/w500';
-    return this.imageError ?
-      'assets/poster-placeholder.png' :
-      `${baseUrl}/${this.movie().poster_path}`;
+    return this._imageService.getImageUrl(this.movie().poster_path);
   }
 
   //Se dispara en el evento (error) de la imagen

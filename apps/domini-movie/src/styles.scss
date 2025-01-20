@@ -40,10 +40,10 @@
 
 
 /* You can add global styles to this file, and also import other style files */
-.movie-card {
+  .movie-card {
     @apply relative overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105;
   }
-  
+
   .movie-card img {
     @apply w-full h-full object-cover;
   }
@@ -51,15 +51,16 @@
   .movie-card-overlay {
     @apply absolute bg-gradient-to-t from-black/80 to-transparent opacity-0 transition-opacity duration-300;
   }
-  
   .movie-card:hover .movie-card-overlay {
     @apply opacity-100;
   }
+
+  
   
   .movie-card-content {
     @apply absolute bottom-0 left-0 right-0 p-4 transform translate-y-full transition-transform duration-300;
   }
   
   .movie-card:hover .movie-card-content {
-    @apply translate-y-0;
+    @apply -translate-y-6;
   }

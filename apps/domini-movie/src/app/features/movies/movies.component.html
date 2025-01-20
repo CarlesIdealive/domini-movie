@@ -1,9 +1,18 @@
-<div class="grid grid-cols-2 gap-4 px-4 mx-auto mt-6 max-w-7xl md:grid-cols-4 lg:grid-cols-4">
-    @for (movie of movies(); track $index) {
-        <a [routerLink]="['/movies', movie.id]">
-            <p>{{movie.title}}</p>
-          <movie-card [movie]="movie" class="w-full" />
-        </a>
-        }
+<app-movie-row [title]="'Popular Movies'" [movies]="trendingMovies()" class="px-4 mt-4 md:px-16" />
 
-</div>
+@defer (on viewport) {
+  <div class="grid grid-cols-2 gap-4 px-4 mx-auto mt-6 max-w-7xl md:grid-cols-4 lg:grid-cols-4">
+      @for (movie of movies(); track $index) {
+          <a [routerLink]="['/movies', movie.id]">
+              <p>{{movie.title}}</p>
+            <movie-card [movie]="movie" class="w-full" />
+          </a>
+          }
+  </div>
+}
+<!-- Mientras se carga el contenido, se este div con una animacion de SPIN de tailwind. -->
+@placeholder {
+  <div class="flex justify-center p-4">
+    <div class="w-8 h-8 border-white rounded-full animate-spin"></div>
+  </div>
+}
